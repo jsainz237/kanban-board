@@ -1,4 +1,5 @@
 import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 
 export const SelectionHeader = styled.div`
@@ -18,4 +19,16 @@ export const SelectionHeader = styled.div`
 export const DropdownMenu = styled(Dropdown.Menu)`
     margin-top: 0.5rem;
     min-width: 248px;
+`;
+
+export const DropdownItem = styled(Dropdown.Item)`
+    color: white !important;
+    &:active {
+        background-color: ${({ theme }) => theme.colors.textColor} !important;
+    }
+`;
+
+export const MenuButtonContainer = styled.div`
+    padding: 0 0.5rem;
+    width: 100%;
 `;

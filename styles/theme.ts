@@ -10,8 +10,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6 {
+    color: ${({ theme }) => theme.colors.textColor};
     font-family: ${({ theme }) => theme.fontFamily.header};
     margin: 0;
+  }
+
+  div, p {
+    color: ${({ theme }) => theme.colors.textColor};
   }
 
   a {
@@ -20,13 +25,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   * {
-    color: ${({ theme }) => theme.colors.textColor};
     box-sizing: border-box;
   }
 `;
 
 export const theme = {
   colors: {
+    primary: '#3e6888',
     backgroundColor: '#0d0d0d',
     textColor: '#a9b4bf',
     secondaryColor: '#1e252f',

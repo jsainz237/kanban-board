@@ -1,18 +1,27 @@
 import React from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import {Dropdown, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
+
+import { Button } from '../Button';
 import * as Styled from './styled';
 
 export const ProjectSelector: React.FC = () => {
     return (
         <Dropdown>
             <Dropdown.Toggle as={CustomToggle}>
-                Example Project 1
+                Example Project
             </Dropdown.Toggle>
 
             <Styled.DropdownMenu variant='dark'>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                <Styled.DropdownItem href="#/action-2">Another Example</Styled.DropdownItem>
+                <Dropdown.Divider style={{ margin: '0.5rem' }} />
+                <Styled.MenuButtonContainer>
+                    <Button style={{ width: '100%' }}>
+                        <FontAwesomeIcon icon={faPlus} color='white' style={{ marginRight: 8 }} />
+                        Create new board
+                    </Button>
+                </Styled.MenuButtonContainer>
             </Styled.DropdownMenu>
         </Dropdown>
     )
