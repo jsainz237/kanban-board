@@ -33,6 +33,7 @@ export const theme = {
   colors: {
     primary: '#3e6888',
     backgroundColor: '#0d0d0d',
+    secondaryBackgroundColor: '#343a3f',
     textColor: '#a9b4bf',
     secondaryColor: '#1e252f',
   },

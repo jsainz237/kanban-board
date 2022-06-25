@@ -5,4 +5,5 @@ export const ColumnContainer = styled.div`
     flex-direction: row;
     min-height: 400px;
     margin-top: 2rem;
+    overflow-x: auto;
 `;
