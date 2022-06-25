@@ -1,14 +1,21 @@
 import React from 'react';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { useAppDispatch } from '../../state/hooks';
+import { addColumn } from '../../state/columns.reducer';
 import * as Styled from './styled';
 
-export interface Props {
-    onClick: () => any;
-}
+export const ColumnAdder: React.FC = () => {
+    const dispatch = useAppDispatch();
 
-export const ColumnAdder: React.FC<Props> = ({ onClick }) => (
-    <Styled.AddColumnButton onClick={onClick}>
-        <FontAwesomeIcon icon={faPlus} size='2x' />
-    </Styled.AddColumnButton>
-)
+    const createNewColumn = () => {
+        dispatch(addColumn());
+    }
+
+    return (
+        <Styled.AddColumnButton onClick={createNewColumn}>
+            <FontAwesomeIcon icon={faPlus} size='2x' />
+        </Styled.AddColumnButton>
+    );
+}

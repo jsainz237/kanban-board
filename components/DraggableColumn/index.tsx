@@ -3,18 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import * as Styled from './styled';
 
+import * as Styled from './styled';
+import { useAppDispatch } from '../../state/hooks';
+import { deleteColumn, editColumnName } from '../../state/columns.reducer';
 
 export interface Props {
     name: string;
     index: number;
-    onNameEdit: (ind: number, name: string) => any;
 }
 
-export const DraggableColumn: React.FC<Props> = ({ name, index, onNameEdit: changeColumnName }) => {
+export const DraggableColumn: React.FC<Props> = ({ name, index }) => {
     const inputRef = useRef<any>();
+    const [isMounted, setMounted] = useState<boolean>(false);
     const [columnName, setName] = useState<string>(name);
+    const dispatch = useAppDispatch();
 
     const {
         setNodeRef: setSortableRef,
@@ -30,19 +33,24 @@ export const DraggableColumn: React.FC<Props> = ({ name, index, onNameEdit: chan
     };
 
     useEffect(() => {
-        document.addEventListener('click', handleClickOutside);
-        return () => document.removeEventListener('click', handleClickOutside);
-    })
-
-    useEffect(() => {
+        setMounted(true);
         if(name === '') {
             inputRef.current.focus();
         }
-    });
+
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [])
 
     const handleClickOutside = (e: MouseEvent) => {
         if(e.target !== inputRef.current) {
-            changeColumnName(index, columnName);
+            // delete column if no name is provided
+            if(columnName === '' && isMounted) {
+                dispatch(deleteColumn({ index }));
+                return;
+            }
+            
+            dispatch(editColumnName({ index, name: columnName }));
         }
     }
 
@@ -52,8 +60,14 @@ export const DraggableColumn: React.FC<Props> = ({ name, index, onNameEdit: chan
 
     const handleKeyPress = (e: any) => {
         if(e.keyCode === 13) {
+            // delete column if no name is provided
+            if(columnName === '' && isMounted) {
+                dispatch(deleteColumn({ index }));
+                return;
+            }
+
             e.target.blur();
-            changeColumnName(index, e.target.value);
+            dispatch(editColumnName({ index, name: e.target.value }));
         }
     }
 
