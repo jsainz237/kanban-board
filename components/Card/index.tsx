@@ -1,17 +1,22 @@
+import React from 'react';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+
 import { Card as ICard } from '../../state/cards.reducer';
 import * as Styled from './styled';
 
-export interface Props extends 
-    ICard,
+export interface Props extends ICard {
+    columnId: string;
+};
+
+export interface DraggableProps extends 
+    Props,
     Partial<Omit<
         React.HTMLProps<HTMLDivElement>,
         'id' | 'name'
     >>{};
 
-export const Card = React.forwardRef<{}, Props>(({
+export const Card = React.forwardRef<{}, DraggableProps>(({
     id,
     name,
     description,

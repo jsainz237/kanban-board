@@ -1,13 +1,7 @@
 import React, { useRef } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-
-import { Column as IColumn } from '../../state/columns.reducer';
-import { Column } from './Column';
-
-export interface Props extends IColumn {
-    index: number;
-}
+import { Column, Props } from '.';
 
 export const DraggableColumn: React.FC<Props> = (props) => {
     const colRef = useRef<any>();

@@ -7,11 +7,15 @@ import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { Column as IColumn, deleteColumn } from '../../state/columns.reducer';
-import { DraggableCard } from '../DraggableCard';
+import { DraggableCard } from '../Card/DraggableCard';
 import { selectCards } from '../../state/cards.reducer';
 import * as Styled from './styled';
 
-export interface Props extends
+export interface Props extends IColumn {
+    index: number;
+}
+
+export interface DraggableProps extends
     IColumn,
     Partial<Omit<
         React.HTMLProps<HTMLDivElement>,
@@ -22,7 +26,7 @@ export interface Props extends
         listeners?: SyntheticListenerMap
     };
 
-export const Column = React.forwardRef<{}, Props>(({
+export const Column = React.forwardRef<{}, DraggableProps>(({
     id,
     name,
     index,

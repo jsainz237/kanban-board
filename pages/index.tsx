@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
@@ -7,11 +7,11 @@ import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortabl
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { ProjectSelector } from '../components/ProjectSelector';
 import { ColumnAdder } from '../components/ColumnAdder';
-import { Column } from '../components/DraggableColumn/Column';
-import { DraggableColumn, Props as IColumn } from '../components/DraggableColumn';
+import { Column, Props as IColumn } from '../components/Column';
+import { DraggableColumn } from '../components/Column/DraggableColumn';
 import { moveColumns, selectColumns } from '../state/columns.reducer';
-import { Card } from '../components/DraggableCard/Card';
-import { Card as ICard, moveCard } from '../state/cards.reducer';
+import { Card, Props as ICard } from '../components/Card';
+import { moveCard } from '../state/cards.reducer';
 import * as Styled from '../styles/Home.styled';
 
 const Home: NextPage = () => {

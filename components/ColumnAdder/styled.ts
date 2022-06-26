@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Column as StyledColumn } from '../DraggableColumn/styled';
+import { Column as StyledColumn } from '../Column/styled';
 
 export const AddColumnButton = styled(StyledColumn)`
     cursor: pointer;

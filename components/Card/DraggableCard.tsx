@@ -1,15 +1,9 @@
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { Card, Props } from '.';
 
-import { Card as ICard } from '../../state/cards.reducer';
-import { Card } from './Card';
-
-export interface Props extends ICard {
-    columnId: string;
-};
-
-export const DraggableCard: React.FC<Props> = ({ columnId, ...props }) => {
+export const DraggableCard: React.FC<Props> = (props) => {
     const {
         setNodeRef,
         attributes,
@@ -19,8 +13,8 @@ export const DraggableCard: React.FC<Props> = ({ columnId, ...props }) => {
         active,
     } = useSortable({ id: props.id, data: {
         type: 'CARD',
-        columnId,
-        cardProps: props as ICard 
+        columnId: props.columnId,
+        cardProps: props, 
     }});
 
     const style = {
