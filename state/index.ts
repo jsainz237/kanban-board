@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import cardsReducer from './cards.reducer'
 import columnsReducer from './columns.reducer'
 
 export const store = configureStore({
   reducer: {
     columnsState: columnsReducer,
+    cardsState: cardsReducer,
   },
 })
 

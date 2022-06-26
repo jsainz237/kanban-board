@@ -6,4 +6,5 @@ export const ColumnContainer = styled.div`
     min-height: 400px;
     margin-top: 2rem;
     overflow-x: auto;
+    overflow-y: visible;
 `;

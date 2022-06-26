@@ -2,19 +2,22 @@ import { Form } from 'react-bootstrap';
 import styled from 'styled-components';
 
 export const Column = styled.div`
-    cursor: default;
+    display: flex;
+    flex-direction: column;
     min-width: 350px;
     background-color: ${({ theme }) => theme.colors.secondaryColor};
     border-radius: 0.5rem;
-    overflow: hidden;
     margin-right: 12px;
+    padding: 12px 16px;
+    z-index: 0;
+    cursor: default;
 
     .column-header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 16px;
+        margin-bottom: 12px;
     }
 `;
 
@@ -36,4 +39,9 @@ export const Input = styled(Form.Control).attrs(() => ({
         box-shadow: none;
         font-weight: normal;
     }
+`;
+
+export const CardContainer = styled.div`
+    background-color: red;
+    flex: 1;
 `;

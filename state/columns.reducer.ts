@@ -1,49 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { arrayMove } from '@dnd-kit/sortable';
+import { v4 as uuid } from 'uuid';
 import { RootState } from '.';
 import { UniqueIdentifier } from '@dnd-kit/core';
 
-export interface Card {
-  id: UniqueIdentifier;
-  name: string;
-  description: string;
-  createdDate: string;
-  status: 'open' | 'closed';
-}
-
 export interface Column {
-  id: UniqueIdentifier;
+  id: string;
   name: string;
-  cards: Card[];
 }
 
 export interface ColumnsState {
   columns: Column[];
 }
 
-const initialState: ColumnsState = {
+export const initialState: ColumnsState = {
   columns: [
     {
-      id: 'col-0',
+      id: uuid(),
       name: 'To do',
-      cards: [{
-        id: 'card-1',
-        name: 'This is a card',
-        description: 'This is an example card',
-        createdDate: new Date().toLocaleDateString(),
-        status: 'open',
-      }],
     },
     {
-      id: 'col-1',
+      id: uuid(),
       name: 'In progress',
-      cards: [],
     },
     {
-      id: 'col-2',
+      id: uuid(),
       name: 'Completed',
-      cards: [],
     }
   ]
 }
@@ -61,7 +44,7 @@ export const columnsSlice = createSlice({
       state.columns = arrayMove(state.columns, oldIndex, newIndex);
     },
     addColumn: (state) => {
-      state.columns = state.columns.concat([{ id: `col-${state.columns.length}`, name: '', cards: [] }]);
+      state.columns = state.columns.concat([{ id: uuid(), name: '' }]);
     },
     deleteColumn: (state, action: PayloadAction<{ index: number }>) => {
       state.columns.splice(action.payload.index, 1);
