@@ -57,6 +57,14 @@ export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
+    addNewCard: ({ cards }, action: PayloadAction<{ columnId: string, card: Omit<Card, 'id' | 'createdDate'> }>) => {
+        const { columnId, card } = action.payload;
+        cards[columnId].push({
+            id: uuid(),
+            createdDate: new Date().toLocaleDateString(),
+            ...card,
+        })
+    },
     addEmptyCardList: ({ cards }, action: PayloadAction<{ columnId: string }>) => {
         const { columnId } = action.payload;
         cards[columnId] = [];
@@ -91,7 +99,7 @@ export const cardsSlice = createSlice({
   },
 })
 
-export const { addEmptyCardList, moveCard } = cardsSlice.actions;
+export const { addNewCard, addEmptyCardList, moveCard } = cardsSlice.actions;
 
 export const selectCards = (columnId: string) => (state: RootState) => state.cardsState.cards[columnId];
 

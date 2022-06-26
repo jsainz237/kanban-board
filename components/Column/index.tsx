@@ -84,7 +84,7 @@ export const Column = React.forwardRef<{}, DraggableProps>(({
                 </SortableContext>
             </Styled.CardContainer>
             <div style={{ padding: '12px 16px' }}>
-                <CardAdder />
+                <CardAdder columnId={id} />
             </div>
         </Styled.Column>
     )

@@ -5,6 +5,7 @@ export const Card = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    cursor: grab;
 
     padding: 8px 12px;
     border-radius: 8px;
@@ -31,6 +32,7 @@ export const CardHeader = styled.div`
     .options-icon {
         padding: 0 4px;
         border-radius: 4px;
+        cursor: pointer;
 
         &:hover {
             background-color: #879099;
