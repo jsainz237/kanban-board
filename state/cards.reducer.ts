@@ -57,6 +57,10 @@ export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
+    addEmptyCardList: ({ cards }, action: PayloadAction<{ columnId: string }>) => {
+        const { columnId } = action.payload;
+        cards[columnId] = [];
+    },
     moveCard: ({ cards }, action: PayloadAction<{ oldColId: string, newColId: string, cardId: string, overId: string }>) => {
         const { oldColId, newColId, cardId, overId } = action.payload;
 
@@ -83,7 +87,7 @@ export const cardsSlice = createSlice({
   },
 })
 
-export const { moveCard } = cardsSlice.actions;
+export const { addEmptyCardList, moveCard } = cardsSlice.actions;
 
 export const selectCards = (columnId: string) => (state: RootState) => state.cardsState.cards[columnId];
 

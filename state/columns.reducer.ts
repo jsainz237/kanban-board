@@ -42,8 +42,9 @@ export const columnsSlice = createSlice({
 
       state.columns = arrayMove(state.columns, oldIndex, newIndex);
     },
-    addColumn: (state) => {
-      state.columns = state.columns.concat([{ id: uuid(), name: '' }]);
+    addColumn: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload;
+      state.columns = state.columns.concat([{ id, name: '' }]);
     },
     deleteColumn: (state, action: PayloadAction<{ index: number }>) => {
       state.columns.splice(action.payload.index, 1);
