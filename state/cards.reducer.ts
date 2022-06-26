@@ -30,7 +30,7 @@ const initialState: CardState = {
                 name: 'This is a card',
                 description: 'This is an example card',
                 createdDate: new Date().toLocaleDateString(),
-                status: 'open',
+                status: 'closed',
             },
             {
                 id: uuid(),
