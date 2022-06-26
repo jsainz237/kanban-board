@@ -41,10 +41,10 @@ const Home: NextPage = () => {
         <Styled.ColumnContainer>
           <DndContext onDragEnd={handleDragEnd}>
             <SortableContext
-              items={columns}
+              items={columns.map(col => col.id)}
               strategy={horizontalListSortingStrategy}
             >
-              {columns.map((name, ind) => <DraggableColumn key={name} name={name} index={ind} /> )}
+              {columns.map((col, ind) => <DraggableColumn key={col.id} index={ind} {...col} /> )}
               <ColumnAdder />
             </SortableContext>
           </DndContext>

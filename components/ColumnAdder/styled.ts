@@ -3,7 +3,7 @@ import { Column as StyledColumn } from '../DraggableColumn/styled';
 
 export const AddColumnButton = styled(StyledColumn)`
     cursor: pointer;
-    background: none;
+    background: none !important;
     border: 3px dashed ${({ theme }) => theme.colors.secondaryBackgroundColor};
     display: flex;
     justify-content: center;

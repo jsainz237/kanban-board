@@ -6,14 +6,13 @@ import { CSS } from '@dnd-kit/utilities';
 
 import * as Styled from './styled';
 import { useAppDispatch } from '../../state/hooks';
-import { deleteColumn, editColumnName } from '../../state/columns.reducer';
+import { Column, deleteColumn, editColumnName } from '../../state/columns.reducer';
 
-export interface Props {
-    name: string;
+export interface Props extends Column {
     index: number;
 }
 
-export const DraggableColumn: React.FC<Props> = ({ name, index }) => {
+export const DraggableColumn: React.FC<Props> = ({ id, name, index }) => {
     const inputRef = useRef<any>();
     const [isMounted, setMounted] = useState<boolean>(false);
     const [columnName, setName] = useState<string>(name);
@@ -25,7 +24,7 @@ export const DraggableColumn: React.FC<Props> = ({ name, index }) => {
         listeners,
         transform,
         transition,
-    } = useSortable({ id: name });
+    } = useSortable({ id });
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -40,10 +39,14 @@ export const DraggableColumn: React.FC<Props> = ({ name, index }) => {
 
         document.addEventListener('click', handleClickOutside);
         return () => document.removeEventListener('click', handleClickOutside);
-    }, [])
+    }, []);
+
+    const onInputChange = (p: any) => {
+        setName(p.target.value);
+    }
 
     const handleClickOutside = (e: MouseEvent) => {
-        if(e.target !== inputRef.current) {
+        if(e.target !== inputRef.current && document.activeElement === inputRef.current) {
             // delete column if no name is provided
             if(columnName === '' && isMounted) {
                 dispatch(deleteColumn({ index }));
@@ -54,12 +57,8 @@ export const DraggableColumn: React.FC<Props> = ({ name, index }) => {
         }
     }
 
-    const onInputChange = (p: any) => {
-        setName(p.target.value);
-    }
-
     const handleKeyPress = (e: any) => {
-        if(e.keyCode === 13) {
+        if(e.keyCode === 13 && document.activeElement === inputRef.current) {
             // delete column if no name is provided
             if(columnName === '' && isMounted) {
                 dispatch(deleteColumn({ index }));
