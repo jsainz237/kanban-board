@@ -63,10 +63,14 @@ export const cardsSlice = createSlice({
     },
     moveCard: ({ cards }, action: PayloadAction<{ oldColId: string, newColId: string, cardId: string, overId: string }>) => {
         const { oldColId, newColId, cardId, overId } = action.payload;
+        
+        if(!newColId) {
+            return;
+        }
 
         const card = cards[oldColId].find(c => c.id === cardId);
-        const cardInd = cards[oldColId].findIndex(c => c.id === cardId);
-        const newInd = cards[newColId].findIndex(c => c.id === overId);
+        const cardInd = cards[oldColId]?.findIndex(c => c.id === cardId);
+        const newInd = cards[newColId]?.findIndex(c => c.id === overId);
 
         // if over card and not column
         if(overId !== newColId) {

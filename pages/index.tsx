@@ -4,23 +4,41 @@ import Head from 'next/head'
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
 import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 
-import { ProjectSelector } from '../components/ProjectSelector';
-import { DraggableColumn } from '../components/DraggableColumn';
-import { ColumnAdder } from '../components/ColumnAdder';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { ProjectSelector } from '../components/ProjectSelector';
+import { ColumnAdder } from '../components/ColumnAdder';
+import { Column } from '../components/DraggableColumn/Column';
+import { DraggableColumn, Props as IColumn } from '../components/DraggableColumn';
 import { moveColumns, selectColumns } from '../state/columns.reducer';
 import { Card } from '../components/DraggableCard/Card';
 import { Card as ICard, moveCard } from '../state/cards.reducer';
 import * as Styled from '../styles/Home.styled';
 
 const Home: NextPage = () => {
-  const [activeCard, setActiveCard] = useState<ICard | null>(null);
+  const [activeElement, setActiveElement] = useState<
+    { type: 'CARD' | 'COL', props: ICard | IColumn } | null
+  >(null);
+
   const columns = useAppSelector(selectColumns);
   const dispatch = useAppDispatch();
 
   const onDragStart = ({ active }: DragStartEvent) => {
     if(active?.data?.current?.type === 'CARD') {
-      setActiveCard(active.data.current.cardProps);
+      const { cardProps } = active.data.current;
+      setActiveElement({
+        type: 'CARD',
+        props: cardProps,
+      });
+      return;
+    }
+
+    if(active?.data?.current?.type === 'COL') {
+      const { columnProps } = active.data.current;
+      setActiveElement({
+        type: 'COL',
+        props: columnProps,
+      });
+      return;
     }
   }
 
@@ -50,7 +68,21 @@ const Home: NextPage = () => {
       }));
     }
 
-    setActiveCard(null);
+    setActiveElement(null);
+  }
+
+  const renderActiveElement = () => {
+    if(!activeElement) {
+      return null;
+    }
+
+    if(activeElement.type === 'CARD') {
+      return <Card {...activeElement?.props as ICard} />
+    }
+
+    if(activeElement.type === 'COL') {
+      return <Column {...activeElement?.props as IColumn} />
+    }
   }
 
   return (
@@ -61,7 +93,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={{ paddingLeft: 48 }}>
+      <Styled.Main>
         <ProjectSelector />
         <Styled.ColumnContainer>
           <DndContext
@@ -75,15 +107,15 @@ const Home: NextPage = () => {
             >
               {columns.map((col, ind) => <DraggableColumn key={col.id} index={ind} {...col} /> )}
               <ColumnAdder />
-              { activeCard && (
+              { activeElement && (
                 <DragOverlay>
-                  <Card {...activeCard} />
+                  {renderActiveElement()}
                 </DragOverlay>
               )}
             </SortableContext>
           </DndContext>
         </Styled.ColumnContainer>
-      </main>
+      </Styled.Main>
     </div>
   )
 }

@@ -4,12 +4,10 @@ import * as Styled from './styled';
 
 export interface Props extends 
     ICard,
-    Partial<
-        Omit<
-            React.HTMLProps<HTMLDivElement>,
-            'id' | 'name'
-        >
-    >{};
+    Partial<Omit<
+        React.HTMLProps<HTMLDivElement>,
+        'id' | 'name'
+    >>{};
 
 export const Card = React.forwardRef<{}, Props>(({ id, name, style, ...props }, ref) => (
     <Styled.Card ref={ref as any} style={style} {...props as any}>
