@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { arrayMove } from '@dnd-kit/sortable';
-import { UniqueIdentifier } from '@dnd-kit/core';
 import { v4 as uuid } from 'uuid';
+
 import { initialState as initialColumns } from './columns.reducer';
 import { RootState } from '.';
 
@@ -57,19 +57,33 @@ export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    moveToColumn: ({ cards }, action: PayloadAction<{ oldColId: string, newColId: string, cardId: string }>) => {
-        const { oldColId, newColId, cardId } = action.payload;
+    moveCard: ({ cards }, action: PayloadAction<{ oldColId: string, newColId: string, cardId: string, overId: string }>) => {
+        const { oldColId, newColId, cardId, overId } = action.payload;
 
         const card = cards[oldColId].find(c => c.id === cardId);
         const cardInd = cards[oldColId].findIndex(c => c.id === cardId);
+        const newInd = cards[newColId].findIndex(c => c.id === overId);
+
+        // if over card and not column
+        if(overId !== newColId) {
+            cards[oldColId].splice(cardInd, 1);
+            cards[newColId].splice(newInd, 0, card!);
+            return;
+        }
+
+        // if moving within same column
+        if(newColId === oldColId) {
+            cards[newColId] = arrayMove(cards[newColId], cardInd, newInd);
+            return;
+        }
         
         cards[oldColId].splice(cardInd, 1);
         cards[newColId].push(card!);
-    }
+    },
   },
 })
 
-export const { moveToColumn } = cardsSlice.actions;
+export const { moveCard } = cardsSlice.actions;
 
 export const selectCards = (columnId: string) => (state: RootState) => state.cardsState.cards[columnId];
 

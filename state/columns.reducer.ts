@@ -35,12 +35,11 @@ export const columnsSlice = createSlice({
   name: 'columns',
   initialState,
   reducers: {
-    moveColumns: (state, action: PayloadAction<{ activeId: UniqueIdentifier, overId: UniqueIdentifier | undefined }>) => {
+    moveColumns: (state, action: PayloadAction<{ activeId: string, overId: string | undefined }>) => {
       const { activeId, overId } = action.payload;
-      console.log({ activeId, overId });
       const oldIndex = state.columns.findIndex(col => col.id === activeId);
       const newIndex = state.columns.findIndex(col => col.id === overId);
-      console.log({ oldIndex, newIndex });
+
       state.columns = arrayMove(state.columns, oldIndex, newIndex);
     },
     addColumn: (state) => {

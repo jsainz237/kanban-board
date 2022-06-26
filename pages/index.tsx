@@ -1,47 +1,41 @@
 import { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { closestCorners, DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
-import { horizontalListSortingStrategy, SortableContext, arrayMove } from '@dnd-kit/sortable';
+import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
+import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 
 import { ProjectSelector } from '../components/ProjectSelector';
 import { DraggableColumn } from '../components/DraggableColumn';
 import { ColumnAdder } from '../components/ColumnAdder';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { moveColumns, selectColumns } from '../state/columns.reducer';
-import * as Styled from '../styles/Home.styled';
 import { Card } from '../components/DraggableCard/Card';
-import { Card as ICard, moveToColumn } from '../state/cards.reducer';
-
+import { Card as ICard, moveCard } from '../state/cards.reducer';
+import * as Styled from '../styles/Home.styled';
 
 const Home: NextPage = () => {
   const [activeCard, setActiveCard] = useState<ICard | null>(null);
   const columns = useAppSelector(selectColumns);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    console.log(activeCard);
-  }, [activeCard]);
-
   const onDragStart = ({ active }: DragStartEvent) => {
-    console.log({ active });
     if(active?.data?.current?.type === 'CARD') {
       setActiveCard(active.data.current.cardProps);
     }
   }
 
   const onDragOver = ({ active, over }: DragOverEvent) => {    
-    // if dragging to different col
     if(active?.data?.current?.type === 'CARD') {
       const oldColId = active.data?.current?.columnId;
       const newColId = over?.data?.current?.type === 'CARD'
         ? over?.data?.current?.columnId
         : over?.id;
 
-      dispatch(moveToColumn({
+      dispatch(moveCard({
         oldColId,
         newColId,
         cardId: active.id as string,
+        overId: over?.id as string,
       }))
     }
   }
@@ -50,7 +44,10 @@ const Home: NextPage = () => {
     const { active, over } = event;
 
     if(active.data?.current?.type === 'COL' && active.id !== over?.id) {
-      dispatch(moveColumns({ activeId: active.id, overId: over?.id }))
+      dispatch(moveColumns({
+        activeId: active.id as string,
+        overId: over?.id as string
+      }));
     }
 
     setActiveCard(null);
