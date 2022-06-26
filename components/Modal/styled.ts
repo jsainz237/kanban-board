@@ -6,7 +6,7 @@ export const Modal = styled(RBModal)`
         background-color: ${({ theme }) => theme.colors.secondaryColor};
         box-shadow: 0px 0px 7px 0px #a9b4bf7d;
 
-        * {
+        *:not(.invalid-feedback) {
             color: ${({ theme }) => theme.colors.textColor};
         }
     }
