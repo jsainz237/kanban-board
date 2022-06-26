@@ -5,8 +5,8 @@ import { v4 as uuid } from 'uuid';
 
 import { useAppDispatch } from '../../state/hooks';
 import { addColumn } from '../../state/columns.reducer';
-import * as Styled from './styled';
 import { addEmptyCardList } from '../../state/cards.reducer';
+import * as Styled from './styled';
 
 export const ColumnAdder: React.FC = () => {
     const dispatch = useAppDispatch();

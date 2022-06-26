@@ -10,6 +10,7 @@ import { Column as IColumn, deleteColumn } from '../../state/columns.reducer';
 import { DraggableCard } from '../Card/DraggableCard';
 import { selectCards } from '../../state/cards.reducer';
 import * as Styled from './styled';
+import { CardAdder } from '../Card/CardAdder';
 
 export interface Props extends IColumn {
     index: number;
@@ -82,6 +83,9 @@ export const Column = React.forwardRef<{}, DraggableProps>(({
                     {cards.map(card => <DraggableCard key={card.id} columnId={id} {...card} />)}
                 </SortableContext>
             </Styled.CardContainer>
+            <div style={{ padding: '12px 16px' }}>
+                <CardAdder />
+            </div>
         </Styled.Column>
     )
 })

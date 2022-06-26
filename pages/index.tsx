@@ -6,7 +6,7 @@ import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortabl
 
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { ProjectSelector } from '../components/ProjectSelector';
-import { ColumnAdder } from '../components/ColumnAdder';
+import { ColumnAdder } from '../components/Column/ColumnAdder';
 import { Column, Props as IColumn } from '../components/Column';
 import { DraggableColumn } from '../components/Column/DraggableColumn';
 import { moveColumns, selectColumns } from '../state/columns.reducer';

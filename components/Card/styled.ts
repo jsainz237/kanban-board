@@ -74,3 +74,20 @@ export const StatusLabel = styled.div<{ status: ICard['status'] }>`
 
     })}
 `;
+
+export const AddCardButton = styled(Card)`
+    min-height: unset;
+    background-color: transparent;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed ${({ theme }) => theme.colors.textColor};
+    color: ${({ theme }) => theme.colors.textColor};
+    
+    * {
+        color: ${({ theme }) => theme.colors.textColor};
+    }
+`;

@@ -47,3 +47,16 @@ export const CardContainer = styled.div`
     overflow-y: auto;
     padding: 0 16px;
 `;
+
+export const AddColumnButton = styled(Column)`
+    cursor: pointer;
+    background: none !important;
+    border: 3px dashed ${({ theme }) => theme.colors.secondaryBackgroundColor};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    * {
+        color: ${({ theme }) => theme.colors.secondaryBackgroundColor};
+    }
+`;
