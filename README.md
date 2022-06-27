@@ -1,5 +1,7 @@
 # Kanban Board - Next.js
 
+<img width="1529" alt="Screen Shot 2022-06-27 at 1 02 26 PM" src="https://user-images.githubusercontent.com/25487419/176006466-7511ad64-5999-4325-8a61-6af721cc74c3.png">
+
 ### [View the live demo](https://kanban.jsainz.me)
 
 ## Tools & Features
