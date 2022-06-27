@@ -59,7 +59,7 @@ export const Card = React.forwardRef<{}, DraggableProps>(({
                 <div>
                     <Styled.CardHeader>
                         <div className='title'>{name}</div>
-                        <Dropdown onMouseDown={e => { console.log("HELLO" ); e.stopPropagation() }} style={{ pointerEvents: 'fill' }}>
+                        <Dropdown style={{ pointerEvents: 'fill' }}>
                             <Dropdown.Toggle as={CardOptionsToggle} />
                             <Styled.DropdownMenu variant='dark'>
                                 <Styled.DropdownItem onClick={onEdit} className='edit-btn'>

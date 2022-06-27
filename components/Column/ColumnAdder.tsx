@@ -12,7 +12,6 @@ export const ColumnAdder: React.FC = () => {
 
     const createNewColumn = () => {
         const columnId = uuid();
-        console.log({ columnId });
         dispatch(addColumn({ id: columnId }));
         dispatch(addEmptyCardList({ columnId }));
     }
