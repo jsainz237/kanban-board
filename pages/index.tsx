@@ -10,7 +10,7 @@ import { ColumnAdder } from '../components/Column/ColumnAdder';
 import { Column, Props as IColumn } from '../components/Column';
 import { DraggableColumn } from '../components/Column/DraggableColumn';
 import { Card, Props as ICard } from '../components/Card';
-import { moveColumns, selectColumns, moveCard } from '../state/projects.reducer';
+import { moveColumns, selectColumns, moveCard, selectActiveProject } from '../state/projects.reducer';
 import * as Styled from '../styles/Home.styled';
 
 const Home: NextPage = () => {
@@ -18,6 +18,7 @@ const Home: NextPage = () => {
     { type: 'CARD' | 'COL', props: ICard | IColumn } | null
   >(null);
 
+  const activeProject = useAppSelector(selectActiveProject)
   const columns = useAppSelector(selectColumns);
   const dispatch = useAppDispatch();
 
@@ -95,7 +96,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Kanban Board</title>
+        <title>Kanban Board - {activeProject.name}</title>
         <meta name="description" content="Kanban board showcase application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
