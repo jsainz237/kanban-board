@@ -4,12 +4,10 @@ import { Row, Col } from 'react-bootstrap';
 
 import Modal from '../Modal';
 import { Button } from '../Button';
-import { Card } from '../../state/cards.reducer';
-
-type CardDto = Pick<Card, 'name' | 'status' | 'description'>;
+import { CardDto } from '../../state/cards.reducer';
 
 export interface Props {
-    header: string;
+    type: 'new' | 'edit';
     show: boolean;
     initialValues?: CardDto;
     handleClose: () => any;
@@ -17,7 +15,7 @@ export interface Props {
 }
 
 export const CardModal: React.FC<Props> = ({
-    header,
+    type,
     show,
     initialValues,
     handleClose,
@@ -48,7 +46,9 @@ export const CardModal: React.FC<Props> = ({
         <Modal show={show} onHide={handleClose} size="lg" centered>
             <Form noValidate validated={validated} onSubmit={submit}>
                 <Modal.Header closeButton closeVariant='white'>
-                    <Modal.Title>{header}</Modal.Title>
+                    <Modal.Title>
+                        {type === 'new' ? 'Create new task' : 'Edit task'}
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
@@ -103,7 +103,7 @@ export const CardModal: React.FC<Props> = ({
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button type="submit">Create</Button>
+                    <Button type="submit">{type === 'new' ? 'Create' : 'Done'}</Button>
                     <Button variant='secondary' onClick={handleClose}>
                         Cancel
                     </Button>

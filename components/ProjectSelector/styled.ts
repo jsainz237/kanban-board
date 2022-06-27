@@ -22,7 +22,6 @@ export const DropdownMenu = styled(Dropdown.Menu)`
 `;
 
 export const DropdownItem = styled(Dropdown.Item)`
-    color: white !important;
     &:active {
         background-color: ${({ theme }) => theme.colors.textColor} !important;
     }

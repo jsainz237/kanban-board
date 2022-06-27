@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { Card as ICard } from '../../state/cards.reducer';
 
 export const Card = styled.div`
@@ -12,10 +13,6 @@ export const Card = styled.div`
     min-height: 140px;
     background-color: ${({ theme }) => theme.colors.textColor};
     margin-bottom: 12px;
-    
-    * {
-        color: ${({ theme }) => theme.colors.secondaryColor};
-    }
 `;
 
 export const CardHeader = styled.div`
@@ -26,10 +23,12 @@ export const CardHeader = styled.div`
     margin-bottom: 8px;
 
     .title {
+        color: ${({ theme }) => theme.colors.secondaryColor};
         font-weight: bold;
     }
 
     .options-icon {
+        color: ${({ theme }) => theme.colors.secondaryColor};
         padding: 0 4px;
         border-radius: 4px;
         cursor: pointer;
@@ -41,6 +40,7 @@ export const CardHeader = styled.div`
 `;
 
 export const DescriptionContainer = styled.div`
+    color: ${({ theme }) => theme.colors.secondaryColor};
     display: -webkit-box;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -57,6 +57,7 @@ export const FooterContainer = styled.div`
     margin-top: 12px;
 
     .date {
+        color: ${({ theme }) => theme.colors.secondaryColor};
         font-size: small;
     }
 `;
@@ -69,7 +70,7 @@ export const StatusLabel = styled.div<{ status: ICard['status'] }>`
     border: 2px solid ${({ theme }) => theme.colors.secondaryColor};
     
     ${({ status, theme }) => ({
-        color: status === 'closed' ? theme.colors.textColor : undefined,
+        color: status === 'closed' ? theme.colors.textColor : theme.colors.secondaryBackgroundColor,
         background: status === 'closed' 
             ? theme.colors.secondaryColor
             : undefined,
@@ -92,4 +93,33 @@ export const AddCardButton = styled(Card)`
     * {
         color: ${({ theme }) => theme.colors.textColor};
     }
+`;
+
+export const DropdownMenu = styled(Dropdown.Menu)`
+    margin-top: -5px;
+    min-width: 150px;
+`;
+
+export const DropdownItem = styled(Dropdown.Item)`
+    &:active {
+        background-color: ${({ theme }) => theme.colors.textColor} !important;
+    }
+
+    &.edit-btn {
+        color: ${({ theme }) => theme.colors.textColor};
+    }
+
+    &.archive-btn {
+        color: #cf3342;
+
+        &:hover, &:active {
+            background-color: #cf3342 !important;
+            color: ${({ theme }) => theme.colors.textColor};
+        }
+    }
+`;
+
+export const MenuButtonContainer = styled.div`
+    padding: 0 0.5rem;
+    width: 100%;
 `;

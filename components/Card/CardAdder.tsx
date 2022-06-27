@@ -41,7 +41,7 @@ export const CardAdder: React.FC<Props> = ({ columnId }) => {
         
         <CardModal
             show={show}
-            header="Create new task"
+            type="new"
             handleClose={handleClose} 
             onSubmit={createCard}
         />

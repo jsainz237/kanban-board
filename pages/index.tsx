@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 
 import { useAppDispatch, useAppSelector } from '../state/hooks';
@@ -21,6 +21,14 @@ const Home: NextPage = () => {
 
   const columns = useAppSelector(selectColumns);
   const dispatch = useAppDispatch();
+
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 15,
+    }
+  });
+
+  const sensors = useSensors(mouseSensor);
 
   const onDragStart = ({ active }: DragStartEvent) => {
     if(active?.data?.current?.type === 'CARD') {
@@ -97,6 +105,7 @@ const Home: NextPage = () => {
         <ProjectSelector />
         <Styled.ColumnContainer>
           <DndContext
+            sensors={sensors}
             onDragStart={onDragStart}
             onDragOver={onDragOver}
             onDragEnd={handleDragEnd}

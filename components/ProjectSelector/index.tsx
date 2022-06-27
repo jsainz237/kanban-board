@@ -18,7 +18,7 @@ export const ProjectSelector: React.FC = () => {
                 <Dropdown.Divider style={{ margin: '0.5rem' }} />
                 <Styled.MenuButtonContainer>
                     <Button style={{ width: '100%' }}>
-                        <FontAwesomeIcon icon={faPlus} color='white' style={{ marginRight: 8 }} />
+                        <FontAwesomeIcon icon={faPlus} style={{ marginRight: 8 }} />
                         Create new board
                     </Button>
                 </Styled.MenuButtonContainer>

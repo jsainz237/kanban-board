@@ -14,6 +14,8 @@ export interface Card {
     status: 'open' | 'closed';
 }
 
+export type CardDto = Pick<Card, 'name' | 'status' | 'description'>;
+
 export interface CardState {
   cards: {
     [key: string]: Card[];
@@ -57,13 +59,28 @@ export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    addNewCard: ({ cards }, action: PayloadAction<{ columnId: string, card: Omit<Card, 'id' | 'createdDate'> }>) => {
+    addNewCard: ({ cards }, action: PayloadAction<{ columnId: string, card: CardDto }>) => {
         const { columnId, card } = action.payload;
         cards[columnId].push({
             id: uuid(),
             createdDate: new Date().toLocaleDateString(),
             ...card,
         })
+    },
+    deleteCard: ({ cards }, action: PayloadAction<{ columnId: string, cardId: string }>) => {
+        const { columnId, cardId } = action.payload;
+        const ind = cards[columnId].findIndex(card => card.id === cardId);
+        cards[columnId].splice(ind, 1);
+    },
+    editCard: ({ cards }, action: PayloadAction<{ columnId: string, cardId: string, card: CardDto }>) => {
+        const { columnId, cardId, card } = action.payload;
+        const ind = cards[columnId].findIndex(c => c.id === cardId);
+        const existing = cards[columnId][ind];
+
+        cards[columnId][ind] = {
+            ...existing,
+            ...card,
+        };
     },
     addEmptyCardList: ({ cards }, action: PayloadAction<{ columnId: string }>) => {
         const { columnId } = action.payload;
@@ -99,7 +116,13 @@ export const cardsSlice = createSlice({
   },
 })
 
-export const { addNewCard, addEmptyCardList, moveCard } = cardsSlice.actions;
+export const {
+    addNewCard,
+    deleteCard,
+    editCard,
+    addEmptyCardList,
+    moveCard,
+} = cardsSlice.actions;
 
 export const selectCards = (columnId: string) => (state: RootState) => state.cardsState.cards[columnId];
 
