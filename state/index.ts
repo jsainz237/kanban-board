@@ -13,26 +13,24 @@ import storage from 'redux-persist/lib/storage'
 import rootReducer from './projects.reducer';
 
 const persistConfig = {
-  key: 'root-404',
+  key: process.env.PERSISTENCE_KEY ?? 'root-404',
   version: 1,
   storage,
 }
 
 // use this for persiting storage
-// disabling for now due to but with collision strategy
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
+
   // use this for persiting storage
-  // disabling for now due to but with collision strategy
-  
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: {
-  //       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-  //     },
-  //   }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store)
