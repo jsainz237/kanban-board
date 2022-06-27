@@ -4,11 +4,12 @@ import { SSRProvider } from 'react-bootstrap';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import { persistor, store } from '../state';
 import { GlobalStyle, theme } from '../styles/theme';
-import '../styles/globals.scss'
+
+import '../styles/globals.scss';
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
 config.autoAddCss = false;
 
