@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGripVertical } from '@fortawesome/free-solid-svg-icons';
+import { faGripVertical, faMultiply } from '@fortawesome/free-solid-svg-icons';
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import { DraggableAttributes } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
@@ -66,6 +66,10 @@ export const Column = React.forwardRef<{}, DraggableProps>(({
         }
     }
 
+    const onArchive = () => {
+        dispatch(deleteColumn({ index }));
+    }
+
     return (
         <Styled.Column ref={ref as any} style={style} {...attributes}>
             <div className='column-header'>
@@ -76,6 +80,14 @@ export const Column = React.forwardRef<{}, DraggableProps>(({
                     onKeyDown={handleKeyPress}
                     onBlur={onBlur}
                 />
+                { cards.length === 0 && (
+                    <FontAwesomeIcon
+                        className={`archive-btn ${cards.length > 0 ? 'disabled' : ''}`}
+                        icon={faMultiply}
+                        size='lg'
+                        onClick={onArchive}
+                    />
+                )}
                 <div style={{ cursor: 'grab' }} {...listeners}>
                     <FontAwesomeIcon icon={faGripVertical} size='lg' />
                 </div>

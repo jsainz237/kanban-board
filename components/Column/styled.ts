@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Column = styled.div`
     display: flex;
     flex-direction: column;
-    min-width: 350px;
+    width: 350px;
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondaryColor};
     border-radius: 0.5rem;
@@ -19,6 +19,18 @@ export const Column = styled.div`
         align-items: center;
         margin-bottom: 12px;
         padding: 12px 16px 0px 16px;
+
+        .archive-btn {
+            visibility: hidden;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+    }
+
+    &:hover {
+        .column-header > .archive-btn {
+            visibility: visible;
+        }
     }
 `;
 

@@ -16,12 +16,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SSRProvider>
       <ReduxProvider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
           <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Component {...pageProps} />
           </ThemeProvider>
-        </PersistGate>
+        {/* </PersistGate> */}
       </ReduxProvider>
     </SSRProvider>
   );
