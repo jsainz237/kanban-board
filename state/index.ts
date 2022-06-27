@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import {
   persistStore,
   persistReducer,
@@ -10,20 +10,15 @@ import {
   REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-
-import cardsReducer from './cards.reducer'
-import columnsReducer from './columns.reducer'
+import rootReducer from './projects.reducer';
 
 const persistConfig = {
-  key: 'root',
+  key: 'root-1',
   version: 1,
   storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, combineReducers({
-  columnsState: columnsReducer,
-  cardsState: cardsReducer,
-}));
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,

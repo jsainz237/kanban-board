@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { v4 as uuid } from 'uuid';
 
 import { useAppDispatch } from '../../state/hooks';
-import { addColumn } from '../../state/columns.reducer';
-import { addEmptyCardList } from '../../state/cards.reducer';
+import { addColumn, addEmptyCardList } from '../../state/projects.reducer';
 import * as Styled from './styled';
 
 export const ColumnAdder: React.FC = () => {
@@ -13,6 +12,7 @@ export const ColumnAdder: React.FC = () => {
 
     const createNewColumn = () => {
         const columnId = uuid();
+        console.log({ columnId });
         dispatch(addColumn({ id: columnId }));
         dispatch(addEmptyCardList({ columnId }));
     }

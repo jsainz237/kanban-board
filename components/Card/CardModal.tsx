@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import Modal from '../Modal';
 import { Button } from '../Button';
-import { CardDto } from '../../state/cards.reducer';
+import { CardDto } from '../../state/projects.reducer';
 
 export interface Props {
     type: 'new' | 'edit';

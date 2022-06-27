@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { Card as ICard } from '../../state/cards.reducer';
+import { Card as ICard } from '../../state/projects.reducer';
 
 export const Card = styled.div`
     display: flex;
@@ -25,6 +25,7 @@ export const CardHeader = styled.div`
     .title {
         color: ${({ theme }) => theme.colors.secondaryColor};
         font-weight: bold;
+        margin-right: 24px;
     }
 
     .options-icon {

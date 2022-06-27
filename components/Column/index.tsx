@@ -6,9 +6,8 @@ import { DraggableAttributes } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { Column as IColumn, deleteColumn } from '../../state/columns.reducer';
 import { DraggableCard } from '../Card/DraggableCard';
-import { selectCards } from '../../state/cards.reducer';
+import { Column as IColumn, deleteColumn, editColumnName, selectCards } from '../../state/projects.reducer';
 import * as Styled from './styled';
 import { CardAdder } from '../Card/CardAdder';
 
@@ -54,7 +53,10 @@ export const Column = React.forwardRef<{}, DraggableProps>(({
     const onBlur = (e: any) => {
         if(e.target.value === '') {
             dispatch(deleteColumn({ index }));
+            return;
         }
+
+        dispatch(editColumnName({ index, name: e.target.value }));
     }
 
     const handleKeyPress = (e: any) => {

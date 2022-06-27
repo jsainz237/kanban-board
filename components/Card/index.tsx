@@ -3,7 +3,7 @@ import { faEllipsis, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Dropdown } from 'react-bootstrap';
 
-import { Card as ICard, CardDto, deleteCard, editCard } from '../../state/cards.reducer';
+import { Card as ICard, CardDto, deleteCard, editCard } from '../../state/projects.reducer';
 import * as Styled from './styled';
 import { useAppDispatch } from '../../state/hooks';
 import { CardModal } from './CardModal';

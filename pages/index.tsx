@@ -9,9 +9,8 @@ import { ProjectSelector } from '../components/ProjectSelector';
 import { ColumnAdder } from '../components/Column/ColumnAdder';
 import { Column, Props as IColumn } from '../components/Column';
 import { DraggableColumn } from '../components/Column/DraggableColumn';
-import { moveColumns, selectColumns } from '../state/columns.reducer';
 import { Card, Props as ICard } from '../components/Card';
-import { moveCard } from '../state/cards.reducer';
+import { moveColumns, selectColumns, moveCard } from '../state/projects.reducer';
 import * as Styled from '../styles/Home.styled';
 
 const Home: NextPage = () => {

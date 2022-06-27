@@ -4,7 +4,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { CardModal } from './CardModal';
-import { addNewCard, Card } from '../../state/cards.reducer';
+import { addNewCard, Card } from '../../state/projects.reducer';
 import { useAppDispatch } from '../../state/hooks';
 import * as Styled from './styled';
 
