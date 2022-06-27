@@ -161,7 +161,7 @@ export const projectsSlice = createSlice({
         moveCard: ({ cards }, action: PayloadAction<{ oldColId: string, newColId: string, cardId: string, overId: string }>) => {
             const { oldColId, newColId, cardId, overId } = action.payload;
             
-            if(!newColId) {
+            if(!newColId || overId === cardId) {
                 return;
             }
     

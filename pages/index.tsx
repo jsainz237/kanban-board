@@ -11,6 +11,7 @@ import { Column, Props as IColumn } from '../components/Column';
 import { DraggableColumn } from '../components/Column/DraggableColumn';
 import { Card, Props as ICard } from '../components/Card';
 import { moveColumns, selectColumns, moveCard, selectActiveProject } from '../state/projects.reducer';
+import { collisionDetection } from '../utils/collisionDetections';
 import * as Styled from '../styles/Home.styled';
 
 const Home: NextPage = () => {
@@ -109,6 +110,7 @@ const Home: NextPage = () => {
             onDragStart={onDragStart}
             onDragOver={onDragOver}
             onDragEnd={handleDragEnd}
+            collisionDetection={collisionDetection}
           >
             <SortableContext
               items={columns.map(col => col.id)}

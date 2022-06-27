@@ -19,7 +19,6 @@ export const DraggableCard: React.FC<Props> = (props) => {
 
     const style = {
         opacity: active?.id === props.id ? 0.5 : 1,
-        transform: CSS.Transform.toString(transform),
         transition,
     };
 
